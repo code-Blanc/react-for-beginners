@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        function App() {
+            const data = React.useState(0);
+            // data 배열에서 필요한 부분을 바로 변수로 추출할 수 있다.
+            const [counter, setCounter] = data; 
+
+            const onClick = () => {
+                // react는 업데이틑 사이사이마다, 
+                // 정확히 어떤 것이 업데이트 왰는지 파악해서
+                // HTML에서 그 부분만 선택적으로 데이터를 업데이트 해준다.
+                setCounter(counter + 1);
+                // 별도로 render를 호출하지 않아도 선택적으로 counter 값만 +1 해준다.
+            }
+            return (
+                <div>
+                    <h3>Total Clicks : {counter}</h3>
+                    <button onClick={onClick}>Click ME!</button>
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, root);
+    </script>
+</html>
