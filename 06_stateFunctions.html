@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = document.getElementById("root");
+        function App() {
+            const [counter, setCounter] = React.useState(0); 
+
+            const onClick = () => {
+                // setCounter(counter + 1);
+                
+                // 만약 현재 state를 바탕으로 다음 state를 계산하고 싶다면
+                // 함수를 사용해야 합니다. 
+                setCounter((current) => current + 1)
+                // 위와 같이 작성할 경우 현재 state인 current(=counter) 값을 가지고 동작합니다.
+                // 즉, 예상치 못한 업데이트가 어디선가 일어나더라도 대응할 수 있습니다.
+            }
+
+            return (
+                <div>
+                    <h3>Total Clicks : {counter}</h3>
+                    <button onClick={onClick}>Click ME!</button>
+                </div>
+            );
+        }
+        ReactDOM.render(<App />, root);
+    </script>
+</html>

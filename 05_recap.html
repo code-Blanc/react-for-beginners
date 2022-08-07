@@ -13,6 +13,8 @@
             // data 배열에서 필요한 부분을 바로 변수로 추출할 수 있다.
             const [counter, setCounter] = data; 
 
+            // modifier 함수를 사용해 state(어플리케이션의 data)를 바꿀 때
+            // 컴포넌트 전체가 새로은 값을 가지고 재생성(rerender)된다.
             const onClick = () => {
                 // react는 업데이틑 사이사이마다, 
                 // 정확히 어떤 것이 업데이트 왰는지 파악해서

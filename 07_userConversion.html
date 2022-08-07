@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        function App() {
+            const [minutes, setMinutes] = React.useState();
+            const [hours, setHours] = React.useState();
+
+            const onChange = (e) => {
+                setMinutes(e.target.value);
+            };
+
+            return (
+                // jsx를 쓰는 동안에는 for을 사용해도 에러가 뜨진 않겠지만,
+                // react 내에선 for, class 등을 사용할 수 없다. (javascript 용어이기 때문에)
+                // 따라서 react 규칙에 따라 권장되는 htmlFor를 사용한다.
+                <div>
+                    <h1>Super Converter</h1>
+                    <label htmlFor="minutes">Minutes</label>
+                    <input value={minutes} id="minutes" placeholder="Minutes" type="number"
+                        onChange={onChange}/>
+                    <h4>You want to convert {minutes}</h4>
+                    <label htmlFor="hours">Hours</label>
+                    <input value={hours} id="hours" placeholder="Hours" type="number"/>
+                </div>
+            );
+        }
+        const root = document.getElementById("root");
+        ReactDOM.render(<App />, root);
+    </script>
+</html>
