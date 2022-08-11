@@ -16,7 +16,7 @@
             };
 
             const reset = () => setAmount(0);
-            const onFlip = () => setInverted((current) => !current);
+            const onInvert = () => setInverted((current) => !current);
 
             return (
                 // jsx를 쓰는 동안에는 for을 사용해도 에러가 뜨진 않겠지만,
@@ -47,7 +47,7 @@
                         />
                     </div>
                     <button onClick={reset}>Reset</button>
-                    <button onClick={onFlip}>Flip</button>
+                    <button onClick={onInvert}>{inverted ? "Turn back" : "Invert"}</button>
                 </div>
             );
         }
