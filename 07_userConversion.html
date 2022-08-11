@@ -8,12 +8,15 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         function App() {
-            const [minutes, setMinutes] = React.useState();
-            const [hours, setHours] = React.useState();
+            const [amount, setAmount] = React.useState(0);
+            const [inverted, setInverted] = React.useState(false);
 
             const onChange = (e) => {
-                setMinutes(e.target.value);
+                setAmount(e.target.value);
             };
+
+            const reset = () => setAmount(0);
+            const onFlip = () => setInverted((current) => !current);
 
             return (
                 // jsx를 쓰는 동안에는 for을 사용해도 에러가 뜨진 않겠지만,
@@ -21,12 +24,30 @@
                 // 따라서 react 규칙에 따라 권장되는 htmlFor를 사용한다.
                 <div>
                     <h1>Super Converter</h1>
+                    <div>
                     <label htmlFor="minutes">Minutes</label>
-                    <input value={minutes} id="minutes" placeholder="Minutes" type="number"
-                        onChange={onChange}/>
-                    <h4>You want to convert {minutes}</h4>
-                    <label htmlFor="hours">Hours</label>
-                    <input value={hours} id="hours" placeholder="Hours" type="number"/>
+                        <input 
+                             value={inverted ? amount * 60 : amount} 
+                            id="minutes" 
+                            placeholder="Minutes" 
+                            type="number"
+                            onChange={onChange}
+                            disabled={inverted}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="hours">Hours</label>
+                        <input 
+                            value={inverted ? amount : Math.round(amount / 60)} 
+                            id="hours" 
+                            placeholder="Hours" 
+                            type="number"
+                            onChange={onChange}
+                            disabled={!inverted}
+                        />
+                    </div>
+                    <button onClick={reset}>Reset</button>
+                    <button onClick={onFlip}>Flip</button>
                 </div>
             );
         }
