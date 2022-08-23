@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    // prop별 기본 값을 부여할 수도 있다.
+    // (js의 파라미터 기본값처럼 쓸 수 있다. 단, PropTypes에서 isRequired가 아닐 경우에 한하여.)
+    function Btn({text, fontSize = 16}) { 
+        return (
+            <div>
+                <button 
+                    style={{
+                        backgroundColor:"tomato",
+                        color:"white",
+                        padding:"10px 20px",
+                        border: 0,
+                        borderRadius: 10,
+                        fontSize
+                    }}
+                >
+                    {text}
+                </button>
+            </div>
+        );
+    };
+    // prop-types.js 를 통해 prop의 type을 체크할 수 있다. 
+    Btn.propTypes = {
+        text: PropTypes.string.isRequired,
+        fontSize: PropTypes.number,
+    }
+    function App() {
+        // 아래 Btn의 onClick은 이벤트 리스너가 아니라 prop이다.
+        return (
+            <div>
+                <Btn text="Save Changes" fontSize={30} />
+                <Btn text="Continue" />
+            </div>
+        );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+</script>
+</html>
