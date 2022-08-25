@@ -1,0 +1,8 @@
+/* styles.css를 쓰게 되면 컴포넌트 전반에 걸쳐 디자인이 입혀지게 된다. */
+
+button {
+    padding: 0.5rem;
+    background-color: tomato;
+    color: white;
+    font-size: 16px;
+}
