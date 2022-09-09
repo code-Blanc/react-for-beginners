@@ -1,25 +1,38 @@
 import { useEffect, useState } from "react";
 
-function Hello() {
-  function hiByeFn () {
-    console.log("created :)");
-    // 해당 component가 detroyed 될 때
-    return function() {
-      console.log("destroyed  :(");
-    }
-  }
-  useEffect(hiByeFn, []);
-  return <h1>Hello</h1>
-}
-
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setShowing((prev) => !prev);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChannge = (e) => setToDo(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (toDo === "") {
+      return;
+    }
+    setToDos(currArray => [toDo, ...currArray]);
+    setToDo("");
+    console.log(toDos);
+  };
 
   return (
     <div>
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
-      {showing ? <Hello /> : null}
+      <h1>My TODOs ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input 
+          onChange={onChannge}
+          value = {toDo}
+          type="text" 
+          placeholder="Write your TODO"
+
+        />
+        <button>Add TODO</button>
+      </form>
+      <hr />
+      <ul>
+        {toDos.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
